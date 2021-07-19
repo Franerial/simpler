@@ -35,12 +35,12 @@ module Simpler
       end
 
       def define_edited_path(path)
-        str = path
+        edited_path = path
         @params.each do |param_name, param_value|
-          str = str.gsub param_value, ":#{param_name.to_s}"
+          edited_path = edited_path.gsub param_value, ":#{param_name.to_s}"
         end
 
-        str
+        edited_path
       end
     end
   end
