@@ -19,13 +19,21 @@ module Simpler
     private
 
     def create_log
-      [@status, @header, @body]
-      %Q(
+      if @status == 404
+        %Q(
+        Request: #{@request.request_method} #{@request.fullpath}
+        Handler: Nil
+        Parameters: #{@request.params}
+        Response: #{full_status} 
+      ).delete!("\n")
+      else
+        %Q(
         Request: #{@request.request_method} #{@request.fullpath}
         Handler: #{controller}##{action}
         Parameters: #{@request.params}
         Response: #{full_status} \[#{@header["Content-Type"]}\] #{view}
-      )
+      ).delete!("\n")
+      end
     end
 
     def controller

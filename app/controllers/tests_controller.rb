@@ -5,16 +5,17 @@ class TestsController < Simpler::Controller
   end
 
   def create
+    status 201
+    render plain: "Create method in action!"
   end
 
   def plain
-    render plain: "plain_option_example"
-    status 201
+    render plain: "Plain text responce example"
+    status 200
   end
 
   def show
     @id = params[:id]
-    render plain: "This is an object (show tests method) with id #{@id}"
   end
 
   def question
