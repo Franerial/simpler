@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "yaml"
 require "singleton"
 require "sequel"
@@ -27,7 +29,10 @@ module Simpler
 
     def call(env)
       route = @router.route_for(env)
+
       return not_found unless route
+      return not_found unless route.params.empty? || db_route_params_exists?(route.params)
+
       env["simpler.route_params"] = route.params
       controller = route.controller.new(env)
       action = route.action
@@ -38,7 +43,7 @@ module Simpler
     private
 
     def require_app
-      Dir["#{Simpler.root}/app/**/*.rb"].each { |file| require file }
+      Dir["#{Simpler.root}/app/**/*.rb"].sort.each { |file| require file }
     end
 
     def require_routes
@@ -57,6 +62,13 @@ module Simpler
 
     def not_found
       [404, { "Content-Type" => "text/plain" }, ["Not found"]]
+    end
+
+    def db_route_params_exists?(params)
+      corresponding_record = nil
+      params.each { |_param_name, param_value| corresponding_record = @db[:tests].first(id: param_value) }
+
+      !corresponding_record.nil?
     end
   end
 end

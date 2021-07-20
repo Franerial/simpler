@@ -16,8 +16,13 @@ module Simpler
       end
 
       def match?(method, path)
-        define_params(path)
-        edited_path = define_edited_path(path) || path
+        @params = define_params(path)
+
+        edited_path = if @params.values.all? && (!@params.values.empty?)
+            define_edited_path(path)
+          else
+            path
+          end
 
         @method == method && edited_path == @path
       end
@@ -31,16 +36,15 @@ module Simpler
         path.scan(ROUTE_PARAM_VALUE_REGEXP).each { |param| route_params_values << (param.delete "/") }
         @path.scan(ROUTE_PARAM_NAME_REGEXP).each { |param| route_params_names << param.delete(":").delete("/").to_sym }
 
-        @params = Hash[route_params_names.zip route_params_values]
+        Hash[route_params_names.zip route_params_values]
       end
 
       def define_edited_path(path)
-        str = path
-        @params.each do |param_name, param_value|
-          str = str.gsub param_value, ":#{param_name.to_s}"
-        end
+        edited_path = path
 
-        str
+        @params.each { |param_name, param_value| edited_path = edited_path.gsub param_value, ":#{param_name.to_s}" }
+
+        edited_path
       end
     end
   end

@@ -1,0 +1,11 @@
+I, [2021-07-20T21:29:48.157677 #288091]  INFO -- :         Request: GET /tests/2        Handler: TestsController#show        Parameters: {:id=>"2"}        Response: 200 OK [text/html] TestsController/show.html.erb      
+I, [2021-07-20T21:30:01.670387 #288091]  INFO -- :         Request: GET /tests/6        Handler: Nil        Parameters: {}        Response: 404 Not Found       
+I, [2021-07-20T21:30:14.369278 #288091]  INFO -- :         Request: GET /tests/3/question/25?one=1        Handler: Nil        Parameters: {"one"=>"1"}        Response: 404 Not Found       
+I, [2021-07-20T21:30:24.195654 #288091]  INFO -- :         Request: GET /tests        Handler: TestsController#index        Parameters: {}        Response: 200 OK [text/html] tests/index.html.erb      
+I, [2021-07-20T21:32:27.196093 #288333]  INFO -- :         Request: POST /tests        Handler: TestsController#create        Parameters: {}        Response: 201 Created [text/plain]       
+I, [2021-07-20T21:35:00.585388 #288333]  INFO -- :         Request: POST /tests        Handler: TestsController#create        Parameters: {}        Response: 201 Created [text/plain]       
+I, [2021-07-20T21:35:02.896432 #288333]  INFO -- :         Request: GET /tests        Handler: TestsController#index        Parameters: {}        Response: 200 OK [text/html] tests/index.html.erb      
+I, [2021-07-20T21:35:07.109826 #288333]  INFO -- :         Request: GET /tests/3/question/25?one=1        Handler: Nil        Parameters: {"one"=>"1"}        Response: 404 Not Found       
+I, [2021-07-20T21:35:10.289813 #288333]  INFO -- :         Request: GET /tests/6        Handler: Nil        Parameters: {}        Response: 404 Not Found       
+I, [2021-07-20T21:35:13.920833 #288333]  INFO -- :         Request: GET /tests/2        Handler: TestsController#show        Parameters: {:id=>"2"}        Response: 200 OK [text/html] TestsController/show.html.erb      
+I, [2021-07-20T21:35:20.181146 #288333]  INFO -- :         Request: GET /tests/plain        Handler: TestsController#plain        Parameters: {}        Response: 200 OK [text/plain]       
